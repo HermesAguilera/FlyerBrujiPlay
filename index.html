@@ -629,13 +629,19 @@
                 seleccionActual = name;
             }
         }
+    prepareDetailsContent();
 
-        prepareDetailsContent();
+    document.getElementById('whatsappBtn').addEventListener('click', function () {
+        let baseMsg = "Hola. Estoy interesado en adquirir un perfil, ¿Me podrían ayudar?";
 
-        document.getElementById('whatsappBtn').addEventListener('click', function () {
-            let baseMsg = "Hola. Estoy interesado en adquirir un perfil, ¿Me podrían ayudar?";
-            window.location.href = `https://wa.me/${miTelefono}?text=${encodeURIComponent(baseMsg)}`;
-        });
-    </script>
+        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+        const url = isIOS
+            ? `whatsapp://send?phone=${miTelefono}&text=${encodeURIComponent(baseMsg)}`
+            : `https://wa.me/${miTelefono}?text=${encodeURIComponent(baseMsg)}`;
+
+        window.open(url, '_blank');
+    });
+</script>
 </body>
 </html>
